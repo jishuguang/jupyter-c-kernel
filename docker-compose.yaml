@@ -1,0 +1,23 @@
+version: "3"
+services:
+  jupyter-c:
+    restart: always
+    image: jupyter-c:20190124
+    container_name: jishuguang-jupyter-c
+    hostname: jupyter-c
+    environment:
+      GRANT_SUDO: "yes"
+      CHOWN_HOME: "yes"
+      CHOWN_HOME_OPTS: "-R"
+      NB_USER: "jishuguang"
+    ports:
+      - "33889:8888"
+      # - "33023:22"
+    volumes:
+      - /opt/jishuguang/workspace/jupyter-c/home:/home
+      - /opt/jishuguang/docker-env/jupyter-c/conda:/opt/conda
+    command:
+      start-notebook.sh --NotebookApp.password='sha1:5e09055d7bce:c8e90be5c5b595632447d87028488b8594503525' --NotebookApp.ip='0.0.0.0'
+      # ilovejishuguang
+    user:
+      root
